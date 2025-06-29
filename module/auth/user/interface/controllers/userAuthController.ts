@@ -24,7 +24,7 @@ const UserMongoRepo=new UserMongoRepositories()
                 password:string;
                 phoneNumber:number;
             }
-            let result=await userSignupApplication({name,email,password,phoneNumber,isActive:false,createdAt:new Date()},signupMongoRepo)
+            let result=await userSignupApplication({name,email,password,phoneNumber,isActive:false,isBlock:false,createdAt:new Date()},signupMongoRepo)
             if(result){
                 res.status(200).json({success:true,message:"OTP has successfully send to your email",data:result})
             }

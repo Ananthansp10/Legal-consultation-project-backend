@@ -7,4 +7,5 @@ export interface UserSignup{
     createdAt:Date;
     _id ? :string;
     googleId ? :string;
+    isBlock:boolean;
 }

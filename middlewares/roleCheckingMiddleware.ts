@@ -6,10 +6,13 @@ export const roleCheck=(req:Request,res:Response,next:NextFunction)=>{
         let accessToken:string | undefined
         let refreshToken:string | undefined
 
-        if(req.body.role=='user'){
+        const role = req.body?.role || req.params?.role || req.query?.role
+
+
+        if(role=='user'){
             accessToken=req.cookies?.accessToken
             refreshToken=req.cookies?.refreshToken
-        }else if(req.body.role=='lawyer'){
+        }else if(role=='lawyer'){
             accessToken=req.cookies?.lawyerAccessToken
             refreshToken=req.cookies?.lawyerRefreshToken
         }else{
@@ -28,7 +31,7 @@ export const roleCheck=(req:Request,res:Response,next:NextFunction)=>{
         }
         
         let decodeToken:any=jwt.decode(accessToken)
-        if(decodeToken && decodeToken.role==req.body.role){
+        if(decodeToken && decodeToken.role==role){
             return next();
         }else{
             res.status(401).json({success:false,message:"User is not valid",isUnAuth:true})

@@ -10,6 +10,11 @@ export const googelAuthApplication=async(data:any,userSignupRepo:SignupMongoRepo
           error.statusCode=409
           throw error;
         }else if(emailExist && emailExist.googleId){
+            if(emailExist.isBlock){
+                let error:any=new Error('Your account has been blocked')
+                error.statusCode=403
+                throw error;
+            }
             return emailExist;
         }
         else{
@@ -18,6 +23,7 @@ export const googelAuthApplication=async(data:any,userSignupRepo:SignupMongoRepo
                 email:data.email,
                 googleId:data.googleId,
                 isActive:true,
+                isBlock:false,
                 createdAt:new Date()
             }
             let result=await userSignupRepo.create(userObj)

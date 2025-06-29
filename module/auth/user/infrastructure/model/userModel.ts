@@ -23,6 +23,9 @@ const userSchema=new Schema <UserSignup>({
         type:Boolean,
         required:true
     },
+    isBlock:{
+        type:Boolean
+    },
     createdAt:{
         type:Date
     }

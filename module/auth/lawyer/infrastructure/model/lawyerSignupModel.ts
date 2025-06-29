@@ -39,6 +39,9 @@ const lawyerSignupSchema=new Schema<LawyerSignup>({
         type:Boolean,
         default:false
     },
+    reason:{
+        type:String
+    }
 },{timestamps:true})
 
 export const LawyerModel=mongoose.model<LawyerSignup>("lawyer",lawyerSignupSchema)

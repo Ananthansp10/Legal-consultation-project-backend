@@ -1,6 +1,7 @@
 
 
-export interface LawyerSignup{
+export interface LawyerData{
+
     name:string;
     email:string;
     password:string;
@@ -10,6 +11,5 @@ export interface LawyerSignup{
     documents:[string];
     isBlock:boolean;
     verified:boolean;
-    id ? : string;
-    reason ? :string;
+    _id: string;
 }

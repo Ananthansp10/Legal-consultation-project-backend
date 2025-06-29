@@ -49,3 +49,21 @@ export const signinLawyer=async(req:Request,res:Response)=>{
         res.status(error.statusCode | 500).json({success:false,message:error.message})
     }
 }
+
+export const logoutLawyer=async(req:Request,res:Response)=>{
+    try {
+        res.clearCookie('lawyerAccessToken',{
+            httpOnly:true,
+            secure:true,
+            sameSite:'none'
+        })
+        res.clearCookie('lawyerRefreshToken',{
+            httpOnly:true,
+            secure:true,
+            sameSite:'none'
+        })
+        res.status(200).json({status:true,message:"logout successfully"})
+    } catch (error) {
+        res.status(500).json({status:false,message:"Something went wrong"})
+    }
+}

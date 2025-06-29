@@ -18,6 +18,7 @@ export const userSignupApplication=async(data:UserSignup,userRepo:UserSignupRepo
             password:hashedPassword,
             phoneNumber:data.phoneNumber,
             isActive:data.isActive,
+            isBlock:false,
             createdAt:new Date()
         })
         const otp=await otpGenerate()

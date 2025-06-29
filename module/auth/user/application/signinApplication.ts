@@ -12,6 +12,11 @@ export const signinApplication=async(data:SigninEntitie,signinRepo:SigninRepo)=>
            error.statusCode=404
            throw error;
         }else{
+            if(userExist.isBlock){
+                error=new Error('Your account has been blocked')
+                error.statusCode=403
+                throw error;
+            }
             let isPasswordMatch=await bcrypt.compare(data.password,userExist.password)
             if(!isPasswordMatch){
                 error=new Error("Password is wrong")

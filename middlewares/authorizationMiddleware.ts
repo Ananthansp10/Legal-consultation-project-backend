@@ -5,10 +5,12 @@ export const verifyToken=(req:Request,res:Response,next:NextFunction)=>{
         let accessToken:string | undefined
         let refreshToken:string | undefined
 
-        if(req.body.role=='user'){
+        const role=req.body?.role || req.params?.role || req.query?.role
+
+        if(role=='user'){
             accessToken=req.cookies?.accessToken
             refreshToken=req.cookies?.refreshToken
-        }else if(req.body.role=='lawyer'){
+        }else if(role=='lawyer'){
             accessToken=req.cookies?.lawyerAccessToken
             refreshToken=req.cookies?.lawyerRefreshToken
         }else{
