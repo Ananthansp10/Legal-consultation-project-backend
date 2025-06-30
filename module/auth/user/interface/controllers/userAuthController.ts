@@ -169,7 +169,11 @@ const UserMongoRepo=new UserMongoRepositories()
            })
            res.redirect('http://localhost:5173/user-dashboard')
         } catch (error:any) {
-           res.redirect('http://localhost:5173/emailExist')
+            if(error.message=='Your account has been blocked'){
+                res.redirect('http://localhost:5173/block-page')
+            }else{
+                res.redirect('http://localhost:5173/emailExist')
+            }
         }
     }
 

@@ -1,4 +1,3 @@
-import { response } from "express";
 import { LawyerModel } from "../../../auth/lawyer/infrastructure/model/lawyerSignupModel";
 import { LawyerListingRepo } from "../../interface/repositories/lawyerListingRepositories";
 
@@ -29,6 +28,15 @@ export class LawyerListingMongoRepositories implements LawyerListingRepo{
 
     async blockLawyer(lawyerId: any): Promise<boolean> {
         return LawyerModel.findByIdAndUpdate({_id:lawyerId},{$set:{isBlock:true}}).then((response)=>!!response)
+    }
+
+    async findLawyerById(id: any): Promise<any> {
+        let result=await LawyerModel.findById({_id:id})
+        return result;
+    }
+
+    async removeLawyer(id: any): Promise<boolean> {
+        return LawyerModel.findByIdAndDelete({_id:id}).then((response)=>!!response)
     }
 
 }

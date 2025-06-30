@@ -10,6 +10,11 @@ export const lawyerSigninApplication=async(data:LawyerSigninEntity,lawyerSigninR
             error.statusCode=401
             throw error;
         }else{
+            if(emailExist && emailExist.isBlock){
+                const error:any=new Error("Your account has been blocked")
+                error.statusCode=401
+                throw error;
+            }
             let isPasswordMatch=await bcrypt.compare(data.password,emailExist.password)
             if(!isPasswordMatch){
                 const error:any=new Error("Password is wrong")

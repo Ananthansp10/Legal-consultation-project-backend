@@ -12,5 +12,9 @@ export class LawyerSignupMongoRepo implements LawyerSignupRepo{
     async saveLawyer(data: LawyerSignup): Promise<LawyerSignup | null> {
         return await LawyerModel.create(data)
     }
+
+   async addNewPassword(email: string, password: string): Promise<boolean> {
+        return LawyerModel.updateOne({email:email},{$set:{password:password}}).then((response)=>!!response)
+    }
     
 }

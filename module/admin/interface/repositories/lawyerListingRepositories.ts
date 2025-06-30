@@ -7,4 +7,6 @@ export interface LawyerListingRepo{
     getVerifiedLawyers():Promise<any[]>;
     unBlockLawyer(lawyerId:any):Promise<boolean>;
     blockLawyer(lawyerId:any):Promise<boolean>;
+    findLawyerById(id:any):Promise<any>;
+    removeLawyer(id:any):Promise<boolean>;
 }

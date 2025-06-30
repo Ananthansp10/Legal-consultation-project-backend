@@ -3,6 +3,7 @@ import { changePaasword, checkAuth, forgotPassword, getGoogleAuthDetails, google
 import { verifyToken } from "../middlewares/authorizationMiddleware";
 import { roleCheck } from "../middlewares/roleCheckingMiddleware";
 import { session } from "passport";
+import { isBlock } from "../middlewares/blockCheckingMiddleware";
 const router=express.Router()
 const {registerUser}=require('../module/auth/user/interface/controllers/userAuthController')
 const passport=require('passport')
@@ -23,7 +24,7 @@ router.post('/change-password',changePaasword)
 
 router.post('/reset-password',verifyToken,roleCheck,resetPassword)
 
-router.post('/checkAuth',verifyToken,roleCheck,checkAuth)
+router.post('/checkAuth',verifyToken,roleCheck,isBlock,checkAuth)
 
 router.get("/auth/google",passport.authenticate("google", {scope: ["profile", "email"],session:false}));
 
