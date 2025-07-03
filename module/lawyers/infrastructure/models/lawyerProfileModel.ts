@@ -1,0 +1,69 @@
+import mongoose, { Schema } from "mongoose";
+import { LawyerProfileEntity } from "../../domain/lawyerProfileEntity";
+
+const lawyerProfileSchema=new Schema<LawyerProfileEntity>({
+    lawyerId:{
+        type:mongoose.Types.ObjectId,
+        ref:'lawyers',
+        required:true
+    },
+    personalInfo:{
+        name:{
+            type:String
+        },
+        email:{
+            type:String
+        },
+        phoneNumber:{
+            type:String
+        },
+        DOB:{
+            type:String
+        },
+        gender:{
+            type:String
+        },
+        address:{
+            street:{
+                type:String
+            },
+            country:{
+                type:String
+            },
+            state:{
+                type:String
+            },
+            city:{
+                type:String
+            }
+        },
+        language:[String],
+        profileImage:{
+            type:String
+        }
+    },
+    proffessionalInfo:{
+        practiceAreas:[String],
+        barRegisterNumber:String,
+        experience:String,
+        courtName:String,
+        workLocation:String,
+        fee:String,
+        education:[
+            {
+                degree:{
+                    type:String
+                },
+                university:{
+                    type:String
+                },
+                year:{
+                    type:String
+                }
+            }
+        ],
+        documents:[String]
+    }
+})
+
+export const lawyerProfileModel=mongoose.model<LawyerProfileEntity>('lawyerProfile',lawyerProfileSchema)
