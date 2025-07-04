@@ -4,7 +4,8 @@ import { verifyToken } from "../middlewares/authorizationMiddleware";
 import { roleCheck } from "../middlewares/roleCheckingMiddleware";
 import { session } from "passport";
 import { isBlock } from "../middlewares/blockCheckingMiddleware";
-import { addUserProfile, editUserProfile } from "../module/users/interface/controller/userProfileController";
+import { addUserProfile, editUserProfile, getUserProfile } from "../module/users/interface/controller/userProfileController";
+import upload from "../config/multerConfig";
 const router=express.Router()
 const {registerUser}=require('../module/auth/user/interface/controllers/userAuthController')
 const passport=require('passport')
@@ -33,8 +34,10 @@ router.get("/auth/google/callback",passport.authenticate("google", { session: fa
 
 router.post('/getGoogleAuthDetails',getGoogleAuthDetails)
 
-router.post('/add-profile',addUserProfile)
+router.post('/add-profile',upload.single('profileImage'),addUserProfile)
 
 router.put('/edit-profile',editUserProfile)
+
+router.get('/get-profile/:userId',getUserProfile)
 
 module.exports=router;

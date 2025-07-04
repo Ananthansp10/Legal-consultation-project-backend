@@ -13,4 +13,8 @@ export class UserProfileMongoRepositorie implements UserProfileRepositorie{
     async addProfile(data: UserProfileEntitie): Promise<any> {
         return await userProfileModel.create(data)
     }
+
+    async getProfile(userId: any): Promise<UserProfileEntitie | null> {
+        return await userProfileModel.findOne({userId:userId})
+    }
 }
